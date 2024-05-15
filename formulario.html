@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Viviendas</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+    <h1>Buscar Viviendas</h1>
+    <form action="buscar_viv.php" method="POST">
+        <label for="precio_min">Precio Mínimo:</label>
+        <input type="number" id="precio_min" name="precio_min" min="100000" max="300000" required><br>
+        
+        <label for="precio_max">Precio Máximo:</label>
+        <input type="number" id="precio_max" name="precio_max" min="100000" max="300000" required><br>
+        
+        <label for="habitaciones">Cantidad de Habitaciones:</label>
+        <input type="number" id="habitaciones" name="habitaciones" min="1" required><br>
+        
+        <label for="fecha_construccion">Fecha de Construcción (después de):</label>
+        <input type="date" id="fecha_construccion" name="fecha_construccion" required><br>
+        
+        <button type="submit">Buscar</button>
+    </form>
+
+    <script>
+        function validarFormulario() {
+            // Validar precio mínimo
+            var precioMin = document.getElementById("precio_min").value;
+            if (precioMin <= 0 || isNaN(precioMin)) {
+                alert("Por favor ingrese un precio mínimo válido.");
+                return false;
+            }
+            
+            // Validar precio máximo
+            var precioMax = document.getElementById("precio_max").value;
+            if (precioMax <= 0 || isNaN(precioMax)) {
+                alert("Por favor ingrese un precio máximo válido.");
+                return false;
+            }
+            
+            // Validar cantidad de habitaciones
+            var habitaciones = document.getElementById("habitaciones").value;
+            if (habitaciones <= 0 || isNaN(habitaciones)) {
+                alert("Por favor ingrese una cantidad válida de habitaciones.");
+                return false;
+            }
+            
+            // Validar fecha de construcción
+            var fechaConstruccion = document.getElementById("fecha_construccion").value;
+            var today = new Date();
+            if (new Date(fechaConstruccion) > today) {
+                alert("La fecha de construcción no puede ser en el futuro.");
+                return false;
+            }
+            
+            // Si todo está correcto, el formulario se envía
+            return true;
+        }
+    </script>
+
+</body>
+</html>
